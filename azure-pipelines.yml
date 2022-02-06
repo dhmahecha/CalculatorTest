@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  name: local
+  name: default
 
 steps:
 - script: echo Hello, world!
