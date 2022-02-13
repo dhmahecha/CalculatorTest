@@ -18,8 +18,9 @@ var mc = mc.Client.create(process.env.MEMCACHED_HOST, {
  */
 exports.getSession = function(req){
   try{
-    var id = uuidv4();
-    mc.set(id, process.env.MEMCACHED_VALUE_DEFAULT, {expires:0}, function(err, val) {
+      var id = uuidv4();
+      var sessionArray = new Array();
+      mc.set(id, sessionArray, {expires:0}, function(err, val) {
       if(err != null) {
         console.log('Ocurrio un error al tratar de obtener la sesión: ' + err)
         throw err
@@ -27,12 +28,10 @@ exports.getSession = function(req){
     });
 
     var dateUtil = new DateUtil();
-
     exports.getValueByKey(id).catch(err => console.error(err));
     var sesion = new Sesion(); 
     sesion.id = id;
     sesion.fecha = dateUtil.getFormatCurrentDate();
-
     return sesion;
   }
   catch(ex){
@@ -51,8 +50,23 @@ exports.getValueByKey = async function(id){
   try{
     return mc.get(id);
   }
+  catch(error){
+    console.error(error.message)
+    throw error;
+  }    
+}
+
+/**
+ * Dado el identificador de a sesión, se agrega un nuevo valor 
+ * @param {*} id 
+ * @returns 
+ */
+ exports.setValueSession = function(id, value){
+  try{
+    mc.set(id, value);
+  }
   catch(ex){
     console.error(ex.message)
     throw new Error(ex.message);
-  }    
-}
+  }
+ }

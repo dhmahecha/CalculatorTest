@@ -5,7 +5,10 @@ var Schema                = mongoose.Schema;
 
 var sesionSchema   = new Schema({
     fecha:{ type: String },  
-    id:{ type: String }
+    id:{ 
+        type: String,
+        required: true
+    }
 });
 
 sesionSchema.methods.toJSON = function() {
