@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+var sessionRouter = require('./routes/session');
 
 
 var app = express();
@@ -40,12 +41,10 @@ app.use(function(err, req, res, next) {
 });
 
 // Constants
-const PORT = 3000;
-const HOST = '0.0.0.0';
+const DOMAIN = "calculator"
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
 
 app.use('/', indexRouter);
+app.use('/'+ DOMAIN +'/v1/sessions', sessionRouter);
 
 module.exports = app;
