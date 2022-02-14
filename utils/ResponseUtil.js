@@ -6,7 +6,7 @@ var DateUtil = require('./dateUtil');
 module.exports = class ResponseUtil {
 
   /**
-   * 
+   * Constructor
    * @param {*} messages recibe un objeto de tipo Mensaje o un arreglo del mismo tipo.
    * @param {*} results recibe un objeto con el resultado o un arreglo de de resultados del mismo tipo de objeto.
    */

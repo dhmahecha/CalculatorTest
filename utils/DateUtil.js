@@ -7,7 +7,7 @@ module.exports = class DateUtil {
 
   /**
    * Obtiene la fecha actual formateada.
-   * @returns 
+   * @returns {String} fecha formateada 
    */
   getFormatCurrentDate() {
     var date = new Date();    
