@@ -1,7 +1,7 @@
 'use strict'
 // Cargamos los controladores para usarlos posteriormente
 var SessionService = require('../services/session');
-const MessageType = require('../enums/MessageType'); 
+const MessageType = require('../enums/messageType'); 
 var ResponseUtil = require('../utils/responseUtil');
 var MessageUtil = require('../utils/messageUtil');
 var HttpStatus = require('http-status-codes');
