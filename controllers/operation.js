@@ -1,5 +1,4 @@
 'use strict'
-
 // Cargamos los controladores para usarlos posteriormente
 var SessionService = require('../services/session');
 var OperationService = require('../services/operation');

@@ -1,5 +1,4 @@
 //constantes
-
 module.exports = Object.freeze({
   ERROR_ENVIO_SOLICITUD: 30001,
   ERROR_PARAMETRO_OBLIGATORIO: 30002,

@@ -1,5 +1,6 @@
 //arithmeticOperations.js
 
+
 const ArithmeticOperations = Object.freeze({
     ADDITION: "Addition",
     SUBSTRACTION: "Substraction",

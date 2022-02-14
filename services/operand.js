@@ -18,4 +18,3 @@ exports.validator = async function(req,res,next){
     throw error;
   }
 } 
-

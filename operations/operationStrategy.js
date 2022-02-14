@@ -1,5 +1,4 @@
 'use strict'
-
 module.exports = class OperationStrategy {
     constructor(_operation){
         this._operation = _operation;
