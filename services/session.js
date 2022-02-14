@@ -3,7 +3,7 @@
 var Sesion = require('../models/sesion');
 const { v4: uuidv4 } = require('uuid');
 var mc = require('memjs');
-var DateUtil = require('../utils/DateUtil');
+var DateUtil = require('../utils/dateUtil');
 
 var mc = mc.Client.create(process.env.MEMCACHED_HOST, {
   username: process.env.MEMCACHED_USERNAME,
@@ -22,7 +22,7 @@ exports.getSession = function(req){
       var sessionArray = new Array();
       mc.set(id, sessionArray, {expires:0}, function(err, val) {
       if(err != null) {
-        console.log('Ocurrio un error al tratar de obtener la sesión: ' + err)
+        console.log('Ocurrio un error obteniendo la sesión: ' + err)
         throw err
       }
     });
@@ -48,7 +48,8 @@ exports.getSession = function(req){
  */
 exports.getValueByKey = async function(id){
   try{
-    return mc.get(id);
+    var session = mc.get(id);
+    return session;
   }
   catch(error){
     console.error(error.message)

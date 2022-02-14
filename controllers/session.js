@@ -2,10 +2,11 @@
 
 // Cargamos los controladores para usarlos posteriormente
 var SessionService = require('../services/session');
-const messageType = require('../enums/MessageType'); 
-var ResponseUtil = require('../utils/ResponseUtil');
-var MessageUtil = require('../utils/MessageUtil');
+const MessageType = require('../enums/messageType'); 
+var ResponseUtil = require('../utils/responseUtil');
+var MessageUtil = require('../utils/messageUtil');
 var HttpStatus = require('http-status-codes');
+var CalculatorConstants = require('../constants/calculatorConstants');
 
 /**
  * Se obtiene una nueva sesión
@@ -22,15 +23,15 @@ exports.getNewSession = function(req, res, next){
         var respuesta = responseUtil.getResponse();
         return res.json(respuesta); 
     }).catch(function (error) {
-      return res.status(HttpStatus.StatusCodes.BAD_REQUEST).
-              send(MessageUtil.getMessage(messageType.ERROR, 30002, HttpStatus.ReasonPhrases.BAD_REQUEST, 
-                "Ocurrio un error al tratar de obtener la sesión : " + error.message));
+      return res.status(HttpStatus.StatusCodes.NOT_FOUND).
+              send(MessageUtil.getMessage(MessageType.ERROR, CalculatorConstants.ERROR_OBTENIENDO_SESION, HttpStatus.ReasonPhrases.NOT_FOUND, 
+                "Ocurrio un error obteniendo la sesión: " + error.message));
     });
   }
   catch(exception){
     console.error(exception.message());
     res.status(HttpStatus.StatusCodes.BAD_REQUEST).
-              send(MessageUtil.getMessage(messageType.ERROR, 30001, HttpStatus.ReasonPhrases.BAD_REQUEST, 
+              send(MessageUtil.getMessage(MessageType.ERROR, CalculatorConstants.ERROR_ENVIO_SOLICITUD, HttpStatus.ReasonPhrases.BAD_REQUEST, 
                 "Ocurrio un error al tratar de procesar la solicitud :" + exception.message()));
   }
 }

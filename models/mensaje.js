@@ -1,7 +1,7 @@
 //person.js
 
 var mongoose              = require('mongoose');
-const MessageType     = require('../enums/MessageType');
+const MessageType     = require('../enums/messageType');
 var Schema                = mongoose.Schema;
 
 var mensajeSchema   = new Schema({

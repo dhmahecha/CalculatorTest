@@ -1,8 +1,4 @@
 'use strict'
-
-var constants = require('../constants/CalculatorConstants');
-
-
 module.exports = class DateUtil {
 
   constructor(){

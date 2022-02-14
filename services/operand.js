@@ -1,7 +1,6 @@
 'use strict'
 // Cargamos los modelos para usarlos posteriormente
-var Operand = require('../models/operand');
-const Joi = require('joi');
+var ArithmeticOperations = require('../enums/arithmeticOperations');
 var Operand = require('../models/operand');
 
 /**
@@ -10,7 +9,7 @@ var Operand = require('../models/operand');
  * @param {*} req 
  * @param {*} person 
  */
-exports.operandValidator = async function(req,res,next){
+exports.validator = async function(req,res,next){
   try{
     return await Operand.validate(req.body);
   }

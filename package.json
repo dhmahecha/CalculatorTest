@@ -19,6 +19,7 @@
     "memjs": "^1.3.0",
     "mongoose": "^6.2.1",
     "morgan": "1.10.0",
+    "node-eval": "^2.0.0",
     "pug": "3.0.2",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"

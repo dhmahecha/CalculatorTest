@@ -1,7 +1,7 @@
 'use strict'
 
 var Respuesta = require('../models/respuesta');
-var DateUtil = require('../utils/DateUtil');
+var DateUtil = require('./dateUtil');
 
 module.exports = class ResponseUtil {
 

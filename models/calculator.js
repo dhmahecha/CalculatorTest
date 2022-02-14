@@ -1,7 +1,8 @@
 //operand.js
 
-var mongoose              = require('mongoose');
-var Schema                = mongoose.Schema;
+var mongoose                   = require('mongoose');
+const ArithmeticOperations     = require('../enums/arithmeticOperations');
+var Schema                     = mongoose.Schema;
 
 var calculatorSchema   = new Schema({
     operands: [{
@@ -9,7 +10,8 @@ var calculatorSchema   = new Schema({
         required:true
     }],
     operation : {
-        type: String
+        type: String,
+        enum: Object.values(ArithmeticOperations),
     },
     result: {
         type: Number

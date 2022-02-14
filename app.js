@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var sessionRouter = require('./routes/session');
 var operandRouter = require('./routes/operand');
-
+var operationRouter = require('./routes/operation');
 
 var app = express();
 
@@ -48,5 +48,6 @@ const DOMAIN = "calculator"
 app.use('/', indexRouter);
 app.use('/'+ DOMAIN +'/v1/sessions', sessionRouter);
 app.use('/'+ DOMAIN +'/v1/sessions', operandRouter);
+app.use('/'+ DOMAIN +'/v1/sessions', operationRouter);
 
 module.exports = app;
