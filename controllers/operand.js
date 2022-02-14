@@ -2,12 +2,12 @@
 // Cargamos los controladores para usarlos posteriormente
 var SessionService = require('../services/session');
 var OperandService = require('../services/operand');
-const MessageType = require('../enums/messageType'); 
 var ResponseUtil = require('../utils/responseUtil');
 var MessageUtil = require('../utils/messageUtil');
 var CalculatorUtil = require('../utils/calculatorUtil');
 var HttpStatus = require('http-status-codes');
 var CalculatorConstants = require('../constants/calculatorConstants');
+const MessageType = require('../enums/messageType'); 
 
 /**
  * controller para agregar un nuevo operando

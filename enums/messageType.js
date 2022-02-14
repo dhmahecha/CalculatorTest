@@ -1,4 +1,5 @@
 //messageType.js
+
 const MessageType = Object.freeze({
     INFO: "INFO",
     WARNING: "WARNING",
