@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var sessionRouter = require('./routes/session');
 var operandRouter = require('./routes/operand');
 var operationRouter = require('./routes/operation');
+var helmet = require('helmet');
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
