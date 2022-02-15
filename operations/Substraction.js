@@ -9,8 +9,9 @@ module.exports = class Substraction {
    }
 
     doOperation(operands) {
-      console.log(operands);
       const operation = (accumulator, number) =>  accumulator - number;
-      return operands.reduce(operation)
+      var result = operands.reduce(operation);
+      console.log("Substraction: " + operands + " = " + result);
+      return result;
     }
   }

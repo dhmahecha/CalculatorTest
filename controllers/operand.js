@@ -27,9 +27,7 @@ exports.addNewOperand = function(req, res, next){
           if(results.value == null || results.value == undefined){
             throw new Error("Sesión inexistente, por favor envíe un identificador válido");
           }
-          var operandsArray = Array.from(results.value);
-          operandsArray.push(number);
-          SessionService.setValueSession(id, operandsArray);
+          var operandsArray = OperandService.addOperand(id, results.value, number);
           var calculator = CalculatorUtil.getCalculator(operandsArray, null, null);
           var responseUtil = new ResponseUtil(null, calculator);
           var respuesta = responseUtil.getResponse();

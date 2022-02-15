@@ -9,7 +9,6 @@ module.exports = class Addition {
    }
 
     doOperation(operands) {
-      console.log(operands);
       var acum = 0;
       for (var i = 0; i < operands.length; i++) {
         if(i == 0){
@@ -20,6 +19,7 @@ module.exports = class Addition {
           acum = Math.pow(acum,operands[i]);
         }
       }
+      console.log("Power: " + operands + " = " + acum);
       return acum;
     }
   }
