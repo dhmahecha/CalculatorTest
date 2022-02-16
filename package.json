@@ -1,7 +1,7 @@
 {
-  "name": "docker_web_app",
+  "name": "calculator",
   "version": "1.0.0",
-  "description": "Node.js on Docker",
+  "description": "calculator test for Node.js on Docker",
   "author": "First Last <dh.mahecha@uniandes.edu.co>",
   "main": "app.js",
   "scripts": {
@@ -28,8 +28,5 @@
     "pug": "3.0.2",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3"
   }
 }

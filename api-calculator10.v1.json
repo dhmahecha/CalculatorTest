@@ -1,0 +1,319 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "api-calculator",
+    "version": "1.0",
+    "description": "Expone las operaciones de una calculadora básica",
+    "contact": {
+      "name": "Diego Mahecha",
+      "email": "dh.mahecha@uniandes.edu.co"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://dockercalculatortest.azurewebsites.net/calculator",
+      "description": "production"
+    }
+  ],
+  "paths": {
+    "/v1/sessions": {
+      "parameters": [],
+      "get": {
+        "summary": "Obtener sesión",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Identificador de la sesión",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                },
+                "examples": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-session-calc",
+        "description": "Crea una nueva sesión para la calculadora."
+      }
+    },
+    "/v1/sessions/{id}/operands": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Agregar un operando",
+        "operationId": "post-v1-sessions-id-operands",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "operando invalido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sesión no encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "": {
+            "description": "operando envíado"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Operation"
+              }
+            }
+          }
+        },
+        "description": "Operación para agregar un nuevo operando"
+      }
+    },
+    "/v1/sessions/{id}/operations": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "Realizar una operación",
+        "operationId": "post-v1-sessions-id-operations",
+        "responses": {
+          "200": {
+            "description": "Operación realizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Identificador de sesión no encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Respuesta"
+                }
+              }
+            }
+          }
+        },
+        "description": "endpoint que permite realizar la operación a un arreglo de operandos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Operation"
+              }
+            }
+          },
+          "description": "Esquema con los atributos de la calculadora."
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Calculator": {
+        "title": "Calculator",
+        "type": "object",
+        "description": "Modelo calculadora",
+        "properties": {
+          "operation": {
+            "type": "string",
+            "enum": [
+              "Addition",
+              "Substraction",
+              "Multiplication",
+              "Division",
+              "Power"
+            ],
+            "description": "Enum con el conjunto posible de operaciones a aplicar"
+          },
+          "operands": {
+            "type": "array",
+            "description": "Arreglo de operando a los que se les aplicará una operación.",
+            "items": {
+              "type": "number"
+            }
+          },
+          "result": {
+            "type": "number",
+            "description": "devuelve el resultado de la operación aplicada al arreglo de operandos"
+          }
+        },
+        "required": [
+          "operands"
+        ]
+      },
+      "Mensaje": {
+        "title": "Mensaje",
+        "type": "object",
+        "description": "Estructura de los mensajes de respuesta.",
+        "properties": {
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "INFO",
+              "WARNING",
+              "ERROR",
+              "FATAL"
+            ]
+          },
+          "codigo": {
+            "type": "integer"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "tipo",
+          "codigo",
+          "mensaje",
+          "descripcion"
+        ]
+      },
+      "Respuesta": {
+        "title": "Respuesta",
+        "type": "object",
+        "description": "Estructura de respuesta",
+        "properties": {
+          "resultados": {
+            "type": "object"
+          },
+          "totalRegistros": {
+            "type": "integer"
+          },
+          "estampaTiempo": {
+            "type": "string"
+          },
+          "mensajes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Mensaje"
+            }
+          }
+        },
+        "required": [
+          "totalRegistros",
+          "estampaTiempo"
+        ]
+      },
+      "Sesion": {
+        "title": "Sesion",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identificador único de la sesión."
+          },
+          "fecha": {
+            "type": "string",
+            "description": "Fecha en la que se obtuvo la sesión"
+          }
+        },
+        "required": [
+          "id",
+          "fecha"
+        ],
+        "description": "Esquema que almacena una sesión"
+      },
+      "Operand": {
+        "title": "Operand",
+        "type": "object",
+        "description": "Esquema operando",
+        "properties": {
+          "number": {
+            "type": "number",
+            "description": "Operando"
+          }
+        },
+        "required": [
+          "number"
+        ]
+      },
+      "Operation": {
+        "title": "Operation",
+        "type": "object",
+        "description": "Esquema operation",
+        "properties": {
+          "operation": {
+            "type": "string",
+            "description": "Atributo que indica la operación a realizar.",
+            "enum": [
+              "Addition",
+              "Substraction",
+              "Multiplication",
+              "Division",
+              "Power"
+            ]
+          }
+        },
+        "required": [
+          "operation"
+        ]
+      }
+    }
+  }
+}
