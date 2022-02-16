@@ -49,7 +49,7 @@ La aplicación por defecto corre sobre el puerto `3000`
 
 *Ahora visite la dirección url http://localhost:3000*
 
-[![Puesta en marcha puerto 3000]https://user-images.githubusercontent.com/21015154/154171788-680c8c0f-861c-4406-89d2-66dea9a80587.PNG
+[!Puesta en marcha puerto 3000](https://user-images.githubusercontent.com/21015154/154171788-680c8c0f-861c-4406-89d2-66dea9a80587.PNG)
 
 ### Uso de las API:
 
@@ -120,13 +120,13 @@ Para ejecutar con curl se debn ejecutar los siguientes comandos en la terminal:
 
 ### Diagrama estrategía DevOps:
 
-[![Diagrama estrategía DevOps]https://user-images.githubusercontent.com/21015154/153311782-de04a3d5-c959-4b33-9e88-6d6c02f095c0.PNG
+[!Diagrama estrategía DevOps](https://user-images.githubusercontent.com/21015154/153311782-de04a3d5-c959-4b33-9e88-6d6c02f095c0.PNG)
 
 Se hizo la configuración de los pipelines de Integración y despliegue continuo en Azure Devops para dos ambientes:
 - Desarrollo
 - Producción
 
-[![Proyecto de azure DevOps]https://user-images.githubusercontent.com/21015154/154193777-99a33ab7-408b-45ae-934d-fb7d05a53e1d.PNG
+[!Proyecto de azure DevOps](https://user-images.githubusercontent.com/21015154/154193777-99a33ab7-408b-45ae-934d-fb7d05a53e1d.PNG)
 
 Se configuro un servidor VM Cloud, Self-hosted Agent para resolver las tareas configuradas en los pipeline tipo Linux Ubuntu y se le instalo lo siguiente.
 - npm
@@ -141,13 +141,13 @@ Se Configuraron las siguientes tareas para el ambiente de Integración Continua:
 - npm audit: Busca vulnerabilidades en la aplicación.
 - Build and push: Compila la aplicación, crea la imagen de Docker y la sube en el Docker Hub Registry.
 
-[![Integración Continua]https://user-images.githubusercontent.com/21015154/154193937-7dc12756-e863-4835-9dae-e4044a9d7756.PNG 
+[!Integración Continua](https://user-images.githubusercontent.com/21015154/154193937-7dc12756-e863-4835-9dae-e4044a9d7756.PNG)
 
 Se configuraron tareas por ambiente(Dev, Prod) para Despliegue Continuo:
 - Tarea para despliegue en servidor Web App para containers. Descarga la imagen creada por el pipeline de integración continua y la despliega en un servidor web para containers de Azure. 
 - Tarea para reiniciar el servidor.
 
-[![Despliegue Continuo]https://user-images.githubusercontent.com/21015154/154193841-5b7a8760-9075-409b-98b4-a33d0e389c60.PNG
+[!Despliegue Continuo](https://user-images.githubusercontent.com/21015154/154193841-5b7a8760-9075-409b-98b4-a33d0e389c60.PNG)
 
 
 Para cada ambiente se configuro un servidor Web App for containers.
