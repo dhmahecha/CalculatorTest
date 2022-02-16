@@ -103,6 +103,8 @@ La aplicación por defecto corre sobre el puerto `3000`
 
 A continuación se adjunta el contrato en especificación OpenApi 3.1:
 
+![Contrato Open Api 3.1](https://github.com/dhmahecha/CalculatorTest/blob/develop/api-calculator10.v1.json)
+
 #### Ejecución
 ##### Curl
 Para ejecutar con curl se debn ejecutar los siguientes comandos en la terminal:
