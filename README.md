@@ -103,7 +103,7 @@ La aplicación por defecto corre sobre el puerto `3000`
 
 A continuación se adjunta el contrato en especificación OpenApi 3.1:
 
-![Contrato Open Api 3.1](https://github.com/dhmahecha/CalculatorTest/blob/develop/api-calculator10.v1.json)
+https://github.com/dhmahecha/CalculatorTest/blob/develop/api-calculator10.v1.json
 
 #### Ejecución
 ##### Curl
@@ -120,13 +120,35 @@ Para ejecutar con curl se debn ejecutar los siguientes comandos en la terminal:
 - Agregar operación Linux	
 	curl -d '{"operation" : "Substraction" }' -H 'Content-Type: application/json'  http://localhost:3000/calculator/v1/sessions/66efb3c5-850c-498f-862b-20b5e182b7b5/operations
 
+#### Tests
+Se hizo la configuración de pruebas unitarias con `mocha` y `assert` y reportes con `mochawesome`
+
+Se requiere de las siguientes variables de entorno para una correcta ejecución:
+
+- PORT
+- MEMCACHED_HOST
+- MEMCACHED_USERNAME
+- MEMCACHED_PASSWORD
+- MEMCACHED_VALUE_DEFAULT
+- NODE_ENV
+
+para el despliegue en docker es necesario agregar un archivo .env con las variables mencionadas. Los ambientes de desarrollo y producción en Azure ya están correctamente configurados.
+
+Se probó el flujo normal de los servicios y algunos casos excepcionales como:
+- División por 0
+- Potenciación de un número negativo elevado a un número real.
+
+
+![mocha](https://user-images.githubusercontent.com/21015154/154209480-909f9573-acea-46e1-97b0-601baafba00a.PNG)
+
+
 ### Diagrama estrategía DevOps:
 
 ![Diagrama estrategía DevOps](https://user-images.githubusercontent.com/21015154/153311782-de04a3d5-c959-4b33-9e88-6d6c02f095c0.PNG)
 
 Se hizo la configuración de los pipelines de Integración y despliegue continuo en Azure Devops para dos ambientes:
-- Desarrollo
-- Producción
+- Desarrollo: Plantilla YAML (https://github.com/dhmahecha/CalculatorTest/blob/develop/CI-CD/ApiCalculatorTest-CI-CD-DEV.yml)
+- Producción: Plantilla YAML (https://github.com/dhmahecha/CalculatorTest/blob/develop/CI-CD/ApiCalculatorTest-CI-CD-PROD.yml)
 
 ![Proyecto de azure DevOps](https://user-images.githubusercontent.com/21015154/154193777-99a33ab7-408b-45ae-934d-fb7d05a53e1d.PNG)
 
@@ -156,5 +178,6 @@ Para cada ambiente se configuro un servidor Web App for containers.
 - Desarrollo: https://dockercalculatortestdev.azurewebsites.net/
 - Producción: https://dockercalculatortest.azurewebsites.net/
 
+### Diagrama Arquitectura de Solución:
 
-
+![ArquitecturaSolucion](https://user-images.githubusercontent.com/21015154/154208080-1b4a2f4d-6a40-4fbd-9cec-5df8d3e597b6.PNG)
