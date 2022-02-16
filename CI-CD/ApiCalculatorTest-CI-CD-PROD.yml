@@ -1,0 +1,80 @@
+# Variable 'MEMCACHED_HOST' was defined in the Variables tab
+# Variable 'MEMCACHED_PASSWORD' was defined in the Variables tab
+# Variable 'MEMCACHED_USERNAME' was defined in the Variables tab
+# Variable 'MEMCACHED_VALUE_DEFAULT' was defined in the Variables tab
+# Variable 'NODE_ENV' was defined in the Variables tab
+# Variable 'PORT' was defined in the Variables tab
+trigger:
+  branches:
+    include:
+    - main
+    - develop
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+jobs:
+- job: Job_1
+  displayName: Build Docker Calculator
+  pool:
+    name: Default
+  steps:
+  - checkout: self
+    clean: true
+  - task: Bash@3
+    displayName: Bash Script
+    inputs:
+      targetType: inline
+      script: >-
+        # Write your commands here
+
+
+        mkdir client
+
+        echo ${MEMCACHED_HOST}
+
+        echo ${MEMCACHED_USERNAME}
+
+        echo ${MEMCACHED_PASSWORD}
+
+        echo ${MEMCACHED_VALUE_DEFAULT}
+
+        echo ${NODE_ENV}
+  - task: Npm@1
+    displayName: npm install
+    inputs:
+      workingDir: client
+      verbose: false
+  - task: Npm@1
+    displayName: npm test
+    inputs:
+      command: custom
+      workingDir: client
+      verbose: false
+      customCommand: run test
+  - task: Npm@1
+    displayName: npm audit
+    inputs:
+      command: custom
+      workingDir: client
+      verbose: false
+      customCommand: audit
+  - task: Docker@2
+    displayName: buildAndPush
+    inputs:
+      containerRegistry: 821e12c1-78c3-4e41-a366-8334999ef552
+      repository: dhmahecha/dckappgatetest
+  - task: AzureWebAppContainer@1
+    displayName: 'Azure Web App on Container Deploy: dockercalculatortest'
+    inputs:
+      azureSubscription: 'Azure for Students (9f84f2b5-e191-4c19-859d-5dec8ab85dbe)'
+      appName: dockercalculatortest
+      containers: 'dhmahecha/dckappgatetest:$(Build.BuildNumber)'
+  - task: AzureAppServiceManage@0
+    displayName: 'Restart Azure App Service: dockercalculatortest'
+    inputs:
+      azureSubscription: 'Azure for Students (9f84f2b5-e191-4c19-859d-5dec8ab85dbe)'
+      Action: 'Restart Azure App Service'
+      WebAppName: dockercalculatortest      
+...

@@ -5,7 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-
+var sessionRouter = require('./routes/session');
+var operandRouter = require('./routes/operand');
+var operationRouter = require('./routes/operation');
+var helmet = require('helmet');
 
 var app = express();
 
@@ -18,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -40,12 +44,12 @@ app.use(function(err, req, res, next) {
 });
 
 // Constants
-const PORT = 3000;
-const HOST = '0.0.0.0';
+const DOMAIN = "calculator"
 
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
 
 app.use('/', indexRouter);
+app.use('/'+ DOMAIN +'/v1/sessions', sessionRouter);
+app.use('/'+ DOMAIN +'/v1/sessions', operandRouter);
+app.use('/'+ DOMAIN +'/v1/sessions', operationRouter);
 
 module.exports = app;
