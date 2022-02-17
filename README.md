@@ -110,7 +110,9 @@ https://github.com/dhmahecha/CalculatorTest/blob/develop/api-calculator10.v1.jso
 Para ejecutar con curl se debn ejecutar los siguientes comandos en la terminal:
 
 - Generar Sesión Linux y windows
+
 	curl -v http://localhost:3000/calculator/v1/sessions
+	
 - Agregar operando Windows
 	curl http://localhost:3000/calculator/v1/sessions/66efb3c5-850c-498f-862b-20b5e182b7b5/operands -H "Content-type:application/json" -X POST -d "{""number"" : 1}"
 - Realizar Operación Windows
