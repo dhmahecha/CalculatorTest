@@ -1,5 +1,5 @@
 .DS_STORE
-
+/mochawesome-report
 /dist/
 bazel-*
 e2e_test.*
