@@ -133,7 +133,7 @@ Se requiere de las siguientes variables de entorno para una correcta ejecución:
 - MEMCACHED_VALUE_DEFAULT
 - NODE_ENV
 
-para el despliegue en docker es necesario agregar un archivo .env con las variables mencionadas. Los ambientes de desarrollo y producción en Azure ya están correctamente configurados.
+para el despliegue local y hacel el build del container docker local es necesario agregar un archivo .env con las variables mencionadas. Los ambientes de desarrollo y producción cloud ya están correctamente configurados.
 
 Se probó el flujo normal de los servicios y algunos casos excepcionales como:
 - División por 0
